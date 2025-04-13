@@ -1,8 +1,9 @@
 import streamlit as st
 import openai
 
-# Set your OpenAI key
-openai.api_key = "your_openai_api_key_here"
+# DeepSeek API setup
+openai.api_key = "Sk-aa6408149c574b0eab3f169ec65e6ff6"
+openai.base_url = "https://api.deepseek.com/v1"
 
 # Iraqi personalities
 characters = {
@@ -43,11 +44,11 @@ if send and user_input:
     messages.append({"role": "user", "content": user_input})
 
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="deepseek-chat",
         messages=messages
     )
 
-    reply = response["choices"][0]["message"]["content"]
+    reply = response.choices[0].message.content
 
     st.session_state.chat_history.append({"role": "user", "content": user_input})
     st.session_state.chat_history.append({"role": "assistant", "content": reply})
